@@ -1,0 +1,26 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button (click)="onMenuToggleDispatch()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Gestión de Combustible APP</span>
+    <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+      <ul fxLayout fxLayoutGap="10px" class="navegacion-menu">
+        <li *ngIf="!estadoUsuario">
+          <a routerLink="/registrar">Registrar</a>
+        </li>
+        <li *ngIf="!estadoUsuario">
+          <a routerLink="/login">Login</a>
+        </li>
+        <li *ngIf="!estadoUsuario">
+          <a routerLink="/loginConductor">Conductor</a>
+        </li>
+        <li *ngIf="estadoUsuario">
+          <a routerLink="/">Home</a>
+        </li>
+        <li (click)="terminarSesion()" *ngIf="estadoUsuario">
+          <a routerLink="/">Salir</a>
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar>
+  

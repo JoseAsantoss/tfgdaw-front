@@ -1,0 +1,33 @@
+<section fxLayoutAlign="center">
+    <mat-card>
+        <div>
+            <h2>Acceso único para Usuarios</h2>
+        </div>
+        <form
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayoutGap="10px"
+            #f="ngForm"
+            (ngSubmit)="loginUsuario(f)"
+        >
+            <mat-form-field>
+                <mat-label>Ingrese email</mat-label>
+                <input type="email" matInput placeholder="E-mail" name="email" ngModel required>
+                <mat-error>Debe ingresar un email válido</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Ingrese password</mat-label>
+                <input type="password" matInput placeholder="password" name="password" ngModel required>
+                <mat-error>Debe ingresar un password</mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit">Enviar</button>
+        </form>
+        <div>
+            <p>Si no eres usuario, puedes darte de alta <a routerLink="/registrar">aquí</a></p>
+        </div>
+        <div>
+            <p>Si eres conductor, pulsa <a routerLink="/registrar">aquí</a></p>
+        </div>
+    </mat-card>
+</section>
+

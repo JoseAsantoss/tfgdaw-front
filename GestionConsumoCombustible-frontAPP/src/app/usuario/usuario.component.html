@@ -1,1 +1,25 @@
-<p>usuarios works!</p>
+<main class="container text-center">
+    <h1>Página de usuario</h1>
+    <div class="row">
+        <div class="col-6">
+            <p>Nombre: {{usuario?.nombre}}</p>
+            <p *ngIf="">
+                Apellidos: {{usuario?.apellido1}} {{usuario?.apellido2}}
+            </p>
+        </div>
+        <div class="col-6">
+            <button class="btn btn-primary">Añadir Conductor</button>
+            <button class="btn btn-primary">Añadir Repostaje</button>
+            <button class="btn btn-primary">Añadir Mantenimiento</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            Aquí para el listado de vehículos
+        </div>
+        <div class="col-6">
+            AQuí para el listado de conductores
+        </div>
+    </div>
+
+</main>

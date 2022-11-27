@@ -6,7 +6,12 @@ export const environment = {
   production: false,
   rooturl: 'http://localhost:8086',
 
-  URL_BASE: 'http://localhost:4200'
+  URL_BASE: 'http://localhost:4200',
+
+  ROL_COMPLETO: ['ROLE_ADMIN', 'ROLE_EMPRESA', 'ROLE_PARTICULAR', 'ROLE_CONDUCTOR'],
+  ROL_NO_CONDUCTOR: ['ROLE_ADMIN', 'ROLE_EMPRESA', 'ROLE_PARTICULAR']
+
+
 };
 
 /*

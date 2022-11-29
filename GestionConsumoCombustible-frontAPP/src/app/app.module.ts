@@ -14,6 +14,14 @@ import { UsuarioService } from './services/usuario.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { LoginComponent } from './login/login.component';
+import { ListadoVehiculosComponent } from './pages/vistas/listado-vehiculos/listado-vehiculos.component';
+import { ListadoConductoresComponent } from './pages/vistas/listado-conductores/listado-conductores.component';
+import { FormularioAddUsuarioComponent } from './pages/formularios/formulario-add-usuario/formulario-add-usuario.component';
+import { FormularioAddVehiculoComponent } from './pages/formularios/formulario-add-vehiculo/formulario-add-vehiculo.component';
+import { FormularioAddRepostajesComponent } from './pages/formularios/formulario-add-repostajes/formulario-add-repostajes.component';
+import { FormularioAddMantenimientosComponent } from './pages/formularios/formulario-add-mantenimientos/formulario-add-mantenimientos.component';
+import { ListadoMantenimientosComponent } from './pages/vistas/listado-mantenimientos/listado-mantenimientos.component';
+import { ListadoRepostajesComponent } from './pages/vistas/listado-repostajes/listado-repostajes.component';
 
 
 
@@ -24,7 +32,15 @@ import { LoginComponent } from './login/login.component';
     FooterComponent,
     UsuariosComponent,
     UsuarioComponent,
-    LoginComponent
+    LoginComponent,
+    ListadoVehiculosComponent,
+    ListadoConductoresComponent,
+    FormularioAddUsuarioComponent,
+    FormularioAddVehiculoComponent,
+    FormularioAddRepostajesComponent,
+    FormularioAddMantenimientosComponent,
+    ListadoMantenimientosComponent,
+    ListadoRepostajesComponent
   ],
   imports: [
     BrowserModule,

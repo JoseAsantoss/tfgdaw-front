@@ -16,7 +16,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  public get usuario(): Usuario {
+  public getusuario(): Usuario {
     if (this._usuario != null) {
       return this._usuario;
     } else if (this._usuario == null && sessionStorage.getItem('usuario') != null) {
@@ -97,11 +97,11 @@ export class AuthService {
 
   hasRole(role: string): boolean {
     console.log('LOS PUTOS ROLES DEL USUARIO');
-    console.log(this.usuario.roles);
+    console.log(this._usuario!.roles);
     console.log('QUE PUTO ROLE ESTÁ PASANDO');
     console.log(role);
     
-    if (role.includes(this.usuario.roles)) {
+    if (role.includes(this._usuario!.roles)) {
       console.log('POR COJONES TENGO QUE ENTRAR AQUÍ');
       
       return true;

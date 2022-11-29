@@ -1,25 +1,148 @@
 <main class="container text-center">
-    <h1>Página de usuario</h1>
-    <div class="row">
-        <div class="col-6">
-            <p>Nombre: {{usuario?.nombre}}</p>
-            <p *ngIf="">
-                Apellidos: {{usuario?.apellido1}} {{usuario?.apellido2}}
-            </p>
+    <div class="row m-3">
+        <div class="col-3">
+            <div class="row text-start">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                      <mat-card-title>Datos de usuario</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="table-responsive">
+                        <div *ngIf="!isEmpresa()">
+                            <p><span class="fw-bold">Nombre y Apellidos: </span> blabla</p>
+                        </div>
+                        <div *ngIf="isEmpresa()">
+                            <p><span class="fw-bold">Razón social: </span> blabla</p>
+                        </div>
+                    </mat-card-content>
+                  </mat-card>
+            </div>
+            <div class="row text-start mt-3">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Vehiculos y conductores</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div *ngIf="getNumVehiculos()<1">
+                            <p><span class="fw-bold">No hay vehículos registrados</span></p>
+                        </div>
+                        <div *ngIf="getNumVehiculos()>0">
+                            <p><span class="fw-bold">Núm vehículos registrados:</span> {{getNumVehiculos()}}</p>
+                        </div>
+                        <div *ngIf="getNumConductores()<1">
+                            <p><span class="fw-bold">No hay conductores registrados</span></p>
+                        </div>
+                        <div *ngIf="getNumConductores()>0">
+                            <p><span class="fw-bold">Núm conductores registrados:</span> {{getNumConductores()}}</p>
+                        </div>
+                    </mat-card-content>
+                </mat-card> 
+            </div>
+            <div class="row mt-3">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Acciones</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="w-100 text-start">
+                            <button class="btn btn-outline-primary">
+                              Añadir Conductor 
+                              <mat-icon> person_add </mat-icon>
+                            </button>
+                        </div>
+                        <div class="w-100 text-start mt-3 mb-3">
+                            <button class="btn btn-outline-primary">
+                              Añadir Repostaje 
+                              <mat-icon>local_gas_station</mat-icon>
+                            </button>
+                        </div>
+                        <div class="w-100 text-start">
+                            <button class="btn btn-outline-primary">
+                              Añadir Mantenimiento 
+                              <mat-icon>car_repair</mat-icon>  
+                            </button>
+                        </div>
+                    </mat-card-content>
+                </mat-card> 
+            </div>
         </div>
-        <div class="col-6">
-            <button class="btn btn-primary">Añadir Conductor</button>
-            <button class="btn btn-primary">Añadir Repostaje</button>
-            <button class="btn btn-primary">Añadir Mantenimiento</button>
+        <div class="col-9">
+            <div class="row ms-2">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                      <mat-card-title>Listado de Vehículos</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="table-responsive">
+                        <table class="table table-primary table-striped table-hover table-sm">
+                            <thead>
+                              <tr>
+                                <th scope="col">Vehículo</th>
+                                <th scope="col">Matrícula</th>
+                                <th scope="col">Fecha de compra</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Rav4</td>
+                                <td>4724KWD</td>
+                                <td>15/06/2018</td>
+                              </tr>
+                              <tr>
+                                <td>Mondeo</td>
+                                <td>4752ABC</td>
+                                <td>01/03/2008</td>
+                              </tr>
+                              <tr>
+                                <td>Laguna</td>
+                                <td>4572ABC</td>
+                                <td>01/04/2008</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </mat-card-content>
+                    <mat-card-actions>
+                      <button mat-button>Ver Listado</button>
+                    </mat-card-actions>
+                  </mat-card>
+            </div>
+            <div class="row mt-3 ms-2">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                      <mat-card-title>Listado de Conductores</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="table-responsive">
+                        <table class="table table-primary table-striped table-hover table-sm">
+                            <thead>
+                              <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellidos</th>
+                                <th scope="col">Fecha de Alta</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Javier</td>
+                                <td>López Carbonero</td>
+                                <td>15/06/2018</td>
+                              </tr>
+                              <tr>
+                                <td>Carlos</td>
+                                <td>Martínez Pérez</td>
+                                <td>01/03/2008</td>
+                              </tr>
+                              <tr>
+                                <td>Alba</td>
+                                <td>Pino Puente</td>
+                                <td>01/04/2008</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </mat-card-content>
+                    <mat-card-actions>
+                      <button mat-button>Ver Listado</button>
+                    </mat-card-actions>
+                  </mat-card>
+            </div>
+           
         </div>
     </div>
-    <div class="row">
-        <div class="col-6">
-            Aquí para el listado de vehículos
-        </div>
-        <div class="col-6">
-            AQuí para el listado de conductores
-        </div>
-    </div>
-
 </main>

@@ -13,8 +13,8 @@ const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard, RoleGuard],
     data: {role: environment.ROL_NO_CONDUCTOR}},
-  {path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard, RoleGuard],
-    data: {role: ['ROLE_ADMIN', 'ROLE_EMPRESA', 'ROLE_PARTICULAR']}},
+  {path: 'usuario/usuarios', component: UsuariosComponent, canActivate: [AuthGuard, RoleGuard],
+    data: {role: environment.ROL_NO_CONDUCTOR}},
 ];
 
 @NgModule({

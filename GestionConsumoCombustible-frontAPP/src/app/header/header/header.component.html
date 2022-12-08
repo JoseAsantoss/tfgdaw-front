@@ -4,27 +4,32 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div *ngIf="isLogueado()" class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" aria-current="page" href="#">Inicio</a>
+            <a class="nav-link" aria-current="page" [routerLink]="'/usuario'">Inicio</a>
           </li>
-          <li class="nav-item" routerLinkActive="active">
+          <li *ngIf="verRol() !== 'ROLE_CONDUCTOR'" class="nav-item" routerLinkActive="active">
             <a class="nav-link" href="#">Alta vehiculo</a>
           </li>
-          <li class="nav-item dropdown" routerLinkActive="active">
+          <li *ngIf="verRol() !== 'ROLE_ADMIN'" class="nav-item dropdown" routerLinkActive="active">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Registros
             </a>
-            <ul class="dropdown-menu bg-primary">
+            <ul class="dropdown-menu bg-primary" routerLinkActive="active">
               <li><a class="dropdown-item nav-link bg-primary" href="#">Registro repostaje</a></li>
               <li><a class="dropdown-item nav-link bg-primary" href="#">Registro mantenimientos</a></li>
             </ul>
           </li>
         </ul>
+        <ul class="navbar-nav navbar-right" routerLinkActive="active">
+          <li class="nav-item"><a [routerLink]="'/login'" class="btn btn-outline-danger nav-link" (click)="closeSession()">Cerrar Aplicación</a></li>
+        </ul>
+      </div>
+
+      <div *ngIf="!isLogueado()" class="collapse navbar-collapse d-flex flex-row-reverse" id="navbarSupportedContent">
         <ul class="navbar-nav navbar-right">
-          <li class="nav-item"><a [routerLink]="'/login'" class="btn btn-outline-primary nav-link">Acceder</a></li>
-          <li class="nav-item"><a [routerLink]="'/login'" class="btn btn-outline-primary nav-link" (click)="closeSession()">Salir</a></li>
+          <li class="nav-item"><a [routerLink]="'/registrar'" class="btn btn-outline-success nav-link">Nuevo Usuario</a></li>
         </ul>
       </div>
     </div>

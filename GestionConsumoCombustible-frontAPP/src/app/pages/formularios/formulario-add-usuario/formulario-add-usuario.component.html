@@ -1,1 +1,95 @@
-<h1>Formulario alta y modificación</h1>
+<ul class="alert alert-danger" *ngIf="errores.length > 0">
+    <li *ngFor="let err of errores">
+        {{ err }}
+    </li>
+</ul>
+
+<main *ngIf="esConductor()" class="mt-5">
+    <form fxLayout="column" fxLayoutAlign="center center" fxlayoutGap="20" #f="ngForm" #usuarioForm="ngForm">
+        <mat-form-field>
+            <mat-label>Nombre del usuario:</mat-label>
+            <input type="text" [(ngModel)]="usuario.usuarioNombre" name="usuarioNombre" required placeholder="Ingrese nombre" matInput />
+            <mat-error>Debe indicar el nombre del usuario</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Primer apellido</mat-label>
+            <input type="text" [(ngModel)]="usuario.usuarioApellido1" name="usuarioApellido1" required placeholder="Primer apellido del usuario" matInput />
+            <mat-error>Debe indicar el primer apellido del usuario</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Segundo apellido</mat-label>
+            <input type="text" [(ngModel)]="usuario.usuarioApellido2" name="usuarioApellido2" placeholder="Segundo apellido del usuario" matInput />
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput placeholder="example@ecxample.com" [(ngModel)]="usuario.usuarioEmail" name="email" email required
+                #emailInput="ngModel" />
+            <mat-error *ngIf="emailInput.hasError('required')">El email no puede estar en blanco</mat-error>
+            <mat-error *ngIf="!emailInput.hasError('required')">El email indicado es invalido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" hintLabel="El password debe tener 4 caracteres o más">
+            <mat-label>Ingrese Password</mat-label>
+            <input type="password" matInput placeholder="Ingresa Password" [(ngModel)]="usuario.password" name="password" required
+                minlength="4" />
+            <mat-error>El password debe tener mas de 4 caracteres</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="mt-4">
+            <input type="text" name="roles" value="CONDUCTOR" readonly matInput/>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input type="text" name="empresa" [value]="getNombreEmpresa()" matInput readonly />
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" role="button" (click)="registrarConductor()" *ngIf="!usuario.usuarioId else elseBlock" [disabled]="!usuarioForm.form.valid">Dar de alta</button>
+
+        <ng-template #elseBlock>
+            <button mat-raised-button color="primary" role="button" (click)="updateConductor()" [disabled]="!usuarioForm.form.valid">Editar</button>
+        </ng-template>
+    </form>
+</main>
+<!--
+<main *ngIf="!esConductor()">
+    <form fxLayout="column" fxLayoutAlign="center center" fxlayoutGap="20" #f="ngForm" (ngSubmit)="registrarUsuario(f)">
+        <mat-form-field>
+            <mat-label>Nombre del usuario:</mat-label>
+            <input type="text" ngModel name="nombre" required placeholder="Ingrese nombre" matInput />
+            <mat-error>Debe indicar el nombre del usuario</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Primer apellido</mat-label>
+            <input type="text" ngModel name="apellido1" required placeholder="Primer apellido del usuario" matInput />
+            <mat-error>Debe indicar el primer apellido del usuario</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Segundo apellido</mat-label>
+            <input type="text" ngModel name="apellido2" placeholder="Segundo apellido del usuario" matInput />
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput placeholder="example@ecxample.com" ngModel name="email" email required
+                #emailInput="ngModel" />
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-error *ngIf="emailInput.hasError('required')">El email no puede estar en blanco</mat-error>
+            <mat-error *ngIf="!emailInput.hasError('required')">El email indicado es invalido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" hintLabel="El password debe tener 4 caracteres o más">
+            <mat-label>Ingrese Password</mat-label>
+            <input type="password" matInput placeholder="Ingresa Password" ngModel name="password" required
+                minlength="4" />
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-error>El password debe tener mas de 4 caracteres</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="f.invalid">Guardar</button>
+    </form>
+</main>
+-->

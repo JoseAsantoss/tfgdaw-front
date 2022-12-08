@@ -1,16 +1,16 @@
-import { Rol } from "src/app/model/rol";
-import { UsuarioService } from "../services/usuario.service";
-import { UsuariosComponent } from "../usuarios/usuarios.component";
+import { Empresa } from "./empresa";
+import { Rol } from "./rol";
 
 export class Usuario {
-    id!: number;
-    username!: string;
-    email!: string;
-    nombre!: string;
-    apellido1!: string;
-    apellido2!: string;
+    usuarioId!: number;
+    usuarioEmail!: string;
+    usuarioNombre!: string;
+    usuarioApellido1!: string;
+    usuarioApellido2!: string;
+    usuarioEnable!: boolean;
     password!: string;
-    roles!: string;
+    roles!: Array<Rol>;
+    empresa!: Empresa;
     vehiculos!: [];
     conductores!: [];
 }

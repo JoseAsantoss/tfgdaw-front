@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     console.log(this.usuario);
-    let mail = this.usuario.email;
+    let mail = this.usuario.usuarioEmail;
     let pass = this.usuario.password;
     console.log(mail);
     console.log(pass);
@@ -34,26 +34,44 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    console.log('EL PUTO USUARIO QUE MANDO AL LOGIN');
+    console.log(this.usuario);
+    
+    
     this.authService.login(this.usuario).subscribe({
       next: (response) => {
+        console.log('EL RESPONSE')
         console.log(response);
-  
+
         this.authService.guardarUsuario(response.access_token);
         this.authService.guardarToken(response.access_token);
         let usuario = this.authService.getusuario();
+        let url: string = '';
+
+        usuario.roles.forEach (r => {
+
+          if(r.toString() === 'ROLE_CONDUCTOR'){
+            url = '/usuario-driver'
+          }else {
+            url = '/usuario'
+          }
+        })
+
+        /*
+        if (usuario.roles === 'ROLE_CONDUCTOR') {
+          url = '/usuario-driver'
+        } else {
+          url = '/usuario'
+        }
+        */
   
-        this.router.navigate(['/usuario'])
+        this.router.navigate([url])
           .then(nav => {
-            console.log('JOPUTA');
-            
-            console.log(this.router.url)
-            console.log(nav);
-            
           }), (err: any) => {
             console.log(err);
             
           };
-        swal.fire('Login', `Hola ${usuario.nombre}, has iniciado sesión con éxito`, 'success' );
+        swal.fire('Login', `Hola ${usuario.usuarioNombre}, has iniciado sesión con éxito`, 'success' );
       },
       error: (e) => {
         if(e.status == 400) {

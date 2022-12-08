@@ -5,6 +5,8 @@ import { Usuario } from '../model/usuario';
 import { AppConstants } from '../Constantes/app-routes.constants';
 import { LoginComponent } from '../login/login.component';
 import { Rol } from '../model/rol';
+import { Empresa } from '../model/empresa';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +15,9 @@ export class AuthService {
   private _usuario!: Usuario | null;
   private _token!: string;
   private _userRol!: string;
+  //private _userEmp!: Empresa;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public getusuario(): Usuario {
     if (this._usuario != null) {
@@ -37,22 +40,21 @@ export class AuthService {
   }
 
   login(usuario: Usuario): Observable<any> {
-    const urlEndpoint = 'http://localhost:8086/oauth/token';
-    const credenciales = btoa('gccapp'.concat(':').concat('12345')); 
+    //const credenciales = btoa('gccapp'.concat(':').concat('12345')); 
     
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic ' + credenciales
+      'Authorization': 'Basic ' + environment.CREDENTIALS_APP_AUTH
     });
 
     let params = new URLSearchParams();
     params.set('grant_type', 'password');
-    params.set('username', usuario.email);
+    params.set('username', usuario.usuarioEmail);
     params.set('password', usuario.password);
     console.log("lo que lleva params");
-    
     console.log(params.toString());
-    return this.http.post<any>(urlEndpoint, params.toString(), { headers: httpHeaders });
+
+    return this.http.post<any>(environment.URL_AUTH, params.toString(), { headers: httpHeaders });
   }
 
   guardarUsuario(accessToken: string): void {
@@ -60,18 +62,19 @@ export class AuthService {
     console.log(accessToken);
     let payload = this.obtenerDatosToken(accessToken);
     console.log('EL PUTO PAYLOAD');
-    console.log(payload);
+    console.log(payload.nombre);
     
-    this._usuario = new Usuario();
-    this._usuario.nombre = payload.nombre;
-    this._usuario.apellido1 = payload.apellido1;
-    this._usuario.apellido2 = payload.apellido2;
-    this._usuario.email = payload.email;
-    this._usuario.username = payload.user_name;
-    payload.authorities.forEach((rol: any) => {
-      this._userRol = rol;
-    });;
-    this._usuario.roles = this._userRol;
+    let user = new Usuario();
+    this._usuario = user;
+    this._usuario.usuarioNombre = payload.nombre;
+    this._usuario.usuarioApellido1 = payload.apellido;
+    //this._usuario.apellido2 = payload.apellido2;
+    this._usuario.usuarioEmail = payload.email;
+    this._usuario.empresa = payload.empresa;
+    this._usuario.roles = payload.authorities;
+    console.log('lo que cargo en roles del payload')
+    console.log(this._usuario!.roles);
+    
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
   }
 
@@ -95,15 +98,19 @@ export class AuthService {
     return false;
   }
 
-  hasRole(role: string): boolean {
-    console.log('LOS PUTOS ROLES DEL USUARIO');
-    console.log(this._usuario!.roles);
-    console.log('QUE PUTO ROLE ESTÁ PASANDO');
+  hasRole(role?: string): boolean {
+    let rol: string = '';
+
+    console.log('QUE LE PASA AL ROLE');
     console.log(role);
     
-    if (role.includes(this._usuario!.roles)) {
-      console.log('POR COJONES TENGO QUE ENTRAR AQUÍ');
-      
+    
+
+    this._usuario?.roles.forEach(r => {
+      rol = r.toString();
+    });
+
+    if (role?.includes(rol)) {
       return true;
     }
 

@@ -5,11 +5,16 @@
 export const environment = {
   production: false,
   rooturl: 'http://localhost:8086',
+  URL_AUTH: 'http://localhost:8086/oauth/token',
+  CREDENTIALS_APP_AUTH: btoa('gccapp'.concat(':').concat('12345')),
 
   URL_BASE: 'http://localhost:4200',
 
   ROL_COMPLETO: ['ROLE_ADMIN', 'ROLE_EMPRESA', 'ROLE_PARTICULAR', 'ROLE_CONDUCTOR'],
-  ROL_NO_CONDUCTOR: ['ROLE_ADMIN', 'ROLE_EMPRESA', 'ROLE_PARTICULAR']
+  ROL_NO_CONDUCTOR: ['ROLE_ADMIN', 'ROLE_EMPRESA', 'ROLE_PARTICULAR'],
+  ROL_EMPRESA_PARTICULAR: ['ROLE_EMPRESA', 'ROLE_PARTICULAR'],
+  ROL_CONDUCTOR: 'ROLE_CONDUCTOR',
+  ROL_ADMIN: 'ROLE_ADMIN',
 
 
 };

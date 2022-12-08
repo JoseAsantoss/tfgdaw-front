@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Rol } from 'src/app/model/rol';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -7,13 +8,33 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
   }
 
   closeSession(): void {
     this.authService.logout();
+  }
+
+  isLogueado(): boolean {
+    if (this.authService.token !== '') {
+      return true;
+    }else {
+      return false;
+    }
+  }
+
+  verRol(): string {    
+
+    let nivel!: string;
+
+    this.authService.getusuario().roles.forEach( r => {
+      nivel = r.toString();
+      
+    });
+
+    return nivel;
   }
 
 }

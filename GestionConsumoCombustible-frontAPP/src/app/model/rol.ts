@@ -1,5 +1,5 @@
 export class Rol {
-    tipoUsuarioId?: number;
-    tipoNombreUsuario?: string;
+    rolId?: number;
+    rolDescripcion?: string;
 
 }

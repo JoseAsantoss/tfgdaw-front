@@ -40,7 +40,7 @@ export class UsuarioService {
     }
 
     if (e.status == 403) {
-      swal.fire('Acceso denegado', `Hola ${this.authService.getusuario().username} no tienes acceso a este recurso!`, 'warning');
+      swal.fire('Acceso denegado', `Hola ${this.authService.getusuario().usuarioNombre} no tienes acceso a este recurso!`, 'warning');
       this.router.navigate(['/clientes']);
       return true;
     }
@@ -54,11 +54,7 @@ export class UsuarioService {
           this.isNoAutorizado(e);
           return throwError(() => e);
         })
-      );
-
-        
-       
-          
+      );   
   }
 
   getUsuario(idUsuario: number): Observable<Usuario> {
@@ -66,4 +62,28 @@ export class UsuarioService {
       .get<Usuario>(AppConstants.GESTION_USUARIO + '/' + idUsuario, {headers: this.agregarAuthorizationHeader()})
       .pipe(map((response) => response as Usuario));
   }
+
+  createConductor(usuario: Usuario): Observable<Usuario> {
+    console.log('EL CONDUCTOR QUE SE DA DE ALTA')
+    console.log(usuario)
+    return this.http.post(environment.rooturl + AppConstants.ALTA_CONDUCTOR, usuario, {headers: this.agregarAuthorizationHeader() })
+      .pipe(
+        map((response:any) => response.usuario as Usuario),
+        catchError (e => {
+          if (this.isNoAutorizado(e)) {
+            return throwError(e);
+          }
+
+          if (e.status == 400) {
+            return throwError(e);
+          }
+
+          console.log(e.error.mensaje);
+          swal.fire(e.error.mensaje, e.error.error, 'error');
+          return throwError(e);
+        })
+      )
+  }
+
+
 }

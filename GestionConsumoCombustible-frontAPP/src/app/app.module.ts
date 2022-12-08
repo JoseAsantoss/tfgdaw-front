@@ -22,6 +22,7 @@ import { FormularioAddRepostajesComponent } from './pages/formularios/formulario
 import { FormularioAddMantenimientosComponent } from './pages/formularios/formulario-add-mantenimientos/formulario-add-mantenimientos.component';
 import { ListadoMantenimientosComponent } from './pages/vistas/listado-mantenimientos/listado-mantenimientos.component';
 import { ListadoRepostajesComponent } from './pages/vistas/listado-repostajes/listado-repostajes.component';
+import { UsuarioDriverComponent } from './usuario/usuario-driver.component';
 
 
 
@@ -40,7 +41,8 @@ import { ListadoRepostajesComponent } from './pages/vistas/listado-repostajes/li
     FormularioAddRepostajesComponent,
     FormularioAddMantenimientosComponent,
     ListadoMantenimientosComponent,
-    ListadoRepostajesComponent
+    ListadoRepostajesComponent,
+    UsuarioDriverComponent
   ],
   imports: [
     BrowserModule,

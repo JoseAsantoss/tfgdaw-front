@@ -5,10 +5,10 @@ import { AuthService } from '../services/auth.service';
 import { UsuarioService } from '../services/usuario.service';
 
 @Component({
-  selector: 'app-usuario',
-  templateUrl: './usuario.component.html'
+  selector: 'app-usuario-driver',
+  templateUrl: './usuario-driver.component.html'
 })
-export class UsuarioComponent implements OnInit {
+export class UsuarioDriverComponent implements OnInit {
 
   usuario: Usuario | null;
   numVehiculos!: number;
@@ -26,34 +26,6 @@ export class UsuarioComponent implements OnInit {
     console.log(this.usuario);
     
     
-  }
-
-  isEmpresa(): boolean { 
-    let emp: boolean = false;
-    this.usuario!.roles.forEach(r => {
-      if (r.rolDescripcion === 'ROLE_EMPRESA') {
-        emp = true;
-      }
-    })
-    return emp;
-    /*
-    if (this.usuario!.roles === 'ROLE_EMPRESA') {
-      return true
-    }else {
-      
-      return false
-    }
-    */
-  }
-
-  getNumVehiculos(): number {
-    
-    return 3;
-  }
-
-  getNumConductores(): number {
-
-    return 5;
   }
 
 }

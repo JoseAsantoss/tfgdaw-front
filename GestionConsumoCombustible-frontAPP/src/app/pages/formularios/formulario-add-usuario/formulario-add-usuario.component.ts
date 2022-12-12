@@ -58,10 +58,8 @@ export class FormularioAddUsuarioComponent implements OnInit {
 
   esConductor(): boolean {
     if (this.authService.token === '' || this.authService.token === undefined) {
-      console.log(false)
       return false;
     }else{
-      console.log(true)
       return true;
     }
   }

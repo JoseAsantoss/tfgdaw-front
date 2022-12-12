@@ -1,5 +1,6 @@
 import { Empresa } from "./empresa";
 import { Rol } from "./rol";
+import { Vehiculo } from "./vehiculo";
 
 export class Usuario {
     usuarioId!: number;
@@ -11,6 +12,6 @@ export class Usuario {
     password!: string;
     roles!: Array<Rol>;
     empresa!: Empresa;
-    vehiculos!: [];
-    conductores!: [];
+    vehiculos!: Vehiculo[];
+    conductores!: Usuario[];
 }

@@ -7,11 +7,13 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import swal from 'sweetalert2';
+import { ObserversModule } from '@angular/cdk/observers';
+import { Vehiculo } from '../model/vehiculo';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UsuarioService {
+export class VehiculoService {
   
   private httpHeaders: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   
@@ -47,14 +49,46 @@ export class UsuarioService {
     return false;
   }
 
-  getUsuarios(page: number): Observable<any> {
+  getSumVehiculosUsuarios(usuarioId: number): Observable<any>{
+
+    console.log(environment.rooturl+AppConstants.GESTION_USUARIO+'/'+usuarioId+'/totalVehiculos');
+    console.log('QUE LLEVA LA CONSULTA');
+    console.log(this.http
+      .get<number>(environment.rooturl+AppConstants.GESTION_USUARIO+'/'+usuarioId+'/totalVehiculos', {headers: this.agregarAuthorizationHeader()}));
+    
     return this.http
-      .get(environment.rooturl + AppConstants.OBTENER_USUARIOS+'/page'+page, {headers: this.agregarAuthorizationHeader()}).pipe(
-        catchError(e=> {
+      .get(environment.rooturl+AppConstants.GESTION_USUARIO+'/'+usuarioId+'/totalVehiculos', {headers: this.agregarAuthorizationHeader()}).pipe(
+        catchError(e => {
           this.isNoAutorizado(e);
           return throwError(() => e);
         })
-      );   
+      );
+  }
+
+  getSumConductoresUsuarios(empresa: string): Observable<any>{
+
+    console.log(environment.rooturl+AppConstants.OBTENER_USUARIOS+'/'+empresa+'/contar');
+    console.log('QUE LLEVA LA CONSULTA');
+    console.log(this.http
+      .get<number>(environment.rooturl+AppConstants.OBTENER_USUARIOS+'/'+empresa+'/contar', {headers: this.agregarAuthorizationHeader()}));
+    
+    return this.http
+      .get(environment.rooturl+AppConstants.OBTENER_USUARIOS+'/'+empresa+'/contar', {headers: this.agregarAuthorizationHeader()}).pipe(
+        catchError(e => {
+          this.isNoAutorizado(e);
+          return throwError(() => e);
+        })
+      );
+  }
+
+  getVehiculos(idUsuario: number): Observable<any> {
+    return this.http
+      .get<Vehiculo>(environment.rooturl+AppConstants.GESTION_USUARIO+'/'+idUsuario+'/vehiculos', {headers: this.agregarAuthorizationHeader()}).pipe(
+        catchError(e => {
+          this.isNoAutorizado(e);
+          return throwError(() => e);
+        })
+      )
   }
 
   getUsuario(idUsuario: number): Observable<Usuario> {
@@ -83,17 +117,6 @@ export class UsuarioService {
           return throwError(e);
         })
       )
-  }
-
-  getConductores(empresa: String): Observable<Usuario[]> {
-    return this.http.get(environment.rooturl + AppConstants.OBTENER_USUARIOS + '/' + empresa, {headers: this.agregarAuthorizationHeader() }).pipe(
-      map(response => response as Usuario[]),
-      catchError(e=> {
-        this.isNoAutorizado(e);
-        return throwError(() => e);
-      })
-    ); 
-      
   }
 
 

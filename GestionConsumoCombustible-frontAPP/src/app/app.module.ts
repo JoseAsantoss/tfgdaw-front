@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -53,7 +53,7 @@ import { UsuarioDriverComponent } from './usuario/usuario-driver.component';
     FormsModule,
     FlexLayoutModule
   ],
-  providers: [UsuarioService],
+  providers: [UsuarioService, {provide: LOCALE_ID, useValue: 'es-ES'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

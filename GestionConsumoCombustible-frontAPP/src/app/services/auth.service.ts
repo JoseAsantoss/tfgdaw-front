@@ -66,9 +66,9 @@ export class AuthService {
     
     let user = new Usuario();
     this._usuario = user;
+    this._usuario.usuarioId = payload.id;
     this._usuario.usuarioNombre = payload.nombre;
     this._usuario.usuarioApellido1 = payload.apellido;
-    //this._usuario.apellido2 = payload.apellido2;
     this._usuario.usuarioEmail = payload.email;
     this._usuario.empresa = payload.empresa;
     this._usuario.roles = payload.authorities;

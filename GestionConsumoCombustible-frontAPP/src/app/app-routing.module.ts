@@ -15,6 +15,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path:'login', component: LoginComponent},
+  {path: 'login/registro', component: FormularioAddUsuarioComponent},
   {path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard, RoleGuard],
     data: {role: environment.ROL_NO_CONDUCTOR}},
     {path: 'usuario/nuevo-conductor', component: FormularioAddUsuarioComponent, canActivate: [AuthGuard, RoleGuard],

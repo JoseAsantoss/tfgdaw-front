@@ -17,6 +17,7 @@ import Swal from 'sweetalert2';
 export class FormularioAddUsuarioComponent implements OnInit {
 
   usuario: Usuario = new Usuario();
+  rol: string[] =['ROLE_PARTICULAR', 'ROLE_EMPRESA'];
 
   errores: string[] = [];
 
@@ -39,7 +40,7 @@ export class FormularioAddUsuarioComponent implements OnInit {
     this.usuario.empresa = this.authService.getusuario().empresa;
     this.usuario.roles = [{rolId:4, rolDescripcion:'ROLE_CONDUCTOR'}];
 
-    this.usuarioService.createConductor(this.usuario)
+    this.usuarioService.createUsuario(this.usuario)
       .subscribe(
         usuario => {
           this.router.navigate(['/usuario']);
@@ -56,9 +57,11 @@ export class FormularioAddUsuarioComponent implements OnInit {
   updateConductor(){}
 
   esConductor(): boolean {
-    if (this.authService.token === '') {
+    if (this.authService.token === '' || this.authService.token === undefined) {
+      console.log(false)
       return false;
     }else{
+      console.log(true)
       return true;
     }
   }
@@ -69,6 +72,32 @@ export class FormularioAddUsuarioComponent implements OnInit {
     razonSocial = this.authService.getusuario().empresa.razonSocial;
 
     return razonSocial
+  }
+
+  registrarUsuario(): void {
+    console.log(this.usuario);
+
+
+    this.usuarioService.createUsuario(this.usuario)
+      .subscribe(
+        usuario => {
+          this.router.navigate(['/login']);
+          Swal.fire('Nuevo Usuario', `Hola ${this.usuario.usuarioNombre} el registro ha sido creado con éxito`, 'success');
+        },
+        err => {
+          this.errores = err.error.errors as string[];
+          console.error('Código del error desde el backend: ' + err.status);
+          console.error(err.error.errors);
+        }
+      )
+  }
+
+  empresa(): boolean {
+    if(this.usuario.empresa !== null) {
+      return true;
+    }else{
+      return false;
+    }
   }
 
 }

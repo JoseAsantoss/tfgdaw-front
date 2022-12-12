@@ -1,34 +1,44 @@
 <main class="container text-center">
-    <div class="row m-5">
-        <div class="col-5 mt-3 me-5">
-            <div class="row text-center">
-                <mat-card class="example-card bg-light">
-                    <mat-card-header>
-                      <mat-card-title>Añadir Repostajes</mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content class="mt-3">
-                      <button class="btn btn-outline-primary">
-                        Nuevo Repostaje 
-                        <mat-icon>local_gas_station</mat-icon>
-                      </button>
-                    </mat-card-content>
-                  </mat-card>
-            </div>
-        </div>
-        <div class="col-5 mt-3 me-5">
-          <div class="row text-center">
-              <mat-card class="example-card bg-light">
-                  <mat-card-header>
-                    <mat-card-title>Añadir Mantenimientos</mat-card-title>
-                  </mat-card-header>
-                  <mat-card-content class="mt-3">
-                    <button class="btn btn-outline-primary">
-                      Nuevo Mantenimiento 
-                      <mat-icon>car_repair</mat-icon>  
-                    </button>
-                  </mat-card-content>
-                </mat-card>
-          </div>
+  <div class="row m-5 text-start">
+    <h1 class="">
+      {{usuario?.empresa?.razonSocial}}
+    </h1>
+    <h2 class="">
+      <p>Hola {{usuario?.usuarioNombre}}</p>
+      <p>Hoy es {{dia.getDate()}} de {{getMes(dia.getMonth())}} de {{dia.getFullYear()}}</p>
+    </h2>
+    <h3>Elige la opción a realizar: </h3>
+  </div>
+  <div class="row m-5">
+    <div class="col-5 me-5">
+      <div class="row text-center">
+        <mat-card class="example-card bg-light">
+          <mat-card-header>
+            <mat-card-title>Añadir Repostajes</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="mt-3">
+            <button class="btn btn-outline-primary">
+              Nuevo Repostaje
+              <mat-icon>local_gas_station</mat-icon>
+            </button>
+          </mat-card-content>
+        </mat-card>
       </div>
     </div>
+    <div class="col-5 mt-3 me-5">
+      <div class="row text-center">
+        <mat-card class="example-card bg-light">
+          <mat-card-header>
+            <mat-card-title>Añadir Mantenimientos</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="mt-3">
+            <button class="btn btn-outline-primary">
+              Nuevo Mantenimiento
+              <mat-icon>car_repair</mat-icon>
+            </button>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
 </main>

@@ -63,10 +63,10 @@ export class UsuarioService {
       .pipe(map((response) => response as Usuario));
   }
 
-  createConductor(usuario: Usuario): Observable<Usuario> {
+  createUsuario(usuario: Usuario): Observable<Usuario> {
     console.log('EL CONDUCTOR QUE SE DA DE ALTA')
     console.log(usuario)
-    return this.http.post(environment.rooturl + AppConstants.ALTA_CONDUCTOR, usuario, {headers: this.agregarAuthorizationHeader() })
+    return this.http.post(environment.rooturl + AppConstants.ALTA_USUARIOS, usuario, {headers: this.agregarAuthorizationHeader() })
       .pipe(
         map((response:any) => response.usuario as Usuario),
         catchError (e => {
@@ -95,6 +95,5 @@ export class UsuarioService {
     ); 
       
   }
-
 
 }

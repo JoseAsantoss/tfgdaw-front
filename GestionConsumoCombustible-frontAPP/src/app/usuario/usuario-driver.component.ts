@@ -14,6 +14,7 @@ export class UsuarioDriverComponent implements OnInit {
   numVehiculos!: number;
   numConductores!: number;
   nombreRazonSocial!: string;
+  dia: Date = new Date();
 
 
   constructor(private usuarioService: UsuarioService, private authService: AuthService) {
@@ -24,8 +25,17 @@ export class UsuarioDriverComponent implements OnInit {
     this.usuario = this.authService.getusuario()
     console.log('EL USUARIO QUE SER RECIBE');
     console.log(this.usuario);
-    
-    
+
+  }
+
+  getMes(mes: number) {
+    const meses: string[] = [
+      'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
+      'agosto','septiembre', 'octubre', 'noviembre', 'diciembre'
+    ]
+
+    return meses[mes];
+
   }
 
 }

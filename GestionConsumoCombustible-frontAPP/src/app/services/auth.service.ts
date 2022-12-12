@@ -61,7 +61,7 @@ export class AuthService {
     console.log('EL ACCES TOKEN');
     console.log(accessToken);
     let payload = this.obtenerDatosToken(accessToken);
-    console.log('EL PUTO PAYLOAD');
+    console.log('EL PAYLOAD');
     console.log(payload.nombre);
     
     let user = new Usuario();

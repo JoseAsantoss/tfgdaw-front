@@ -38,6 +38,7 @@ export class UsuarioComponent implements OnInit {
     if (this.usuario.roles.toString() !== 'ROLE_PARTICULAR' &&
     this.usuario.roles.toString() !== 'ROLE_ADMIN') {
       this.cargarNumConductores(this.usuario);
+      this.cargarListadoConductores(this.usuario);
     }
     
     if (this.usuario.roles.toString() !== 'ROLE_ADMIN') {
@@ -46,7 +47,7 @@ export class UsuarioComponent implements OnInit {
     
     this.cargarListadoVehiculos(this.usuario);
 
-    this.cargarListadoConductores(this.usuario);
+    
     
   }
 
@@ -124,8 +125,6 @@ export class UsuarioComponent implements OnInit {
   }
 
   getNumVehiculos(): number {
-    console.log(this.numVehiculos);
-    
     return this.numVehiculos;
   }
 

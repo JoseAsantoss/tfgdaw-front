@@ -27,13 +27,13 @@ export class HeaderComponent implements OnInit {
 
   verRol(): string {    
 
-    let nivel!: string;
+    let nivel: string = '';
 
-    this.authService.getusuario().roles.forEach( r => {
-      nivel = r.toString();
-      
-    });
-
+    if (this.authService.isAuthenticated()){      
+      this.authService.getusuario().roles.forEach( r => {
+        nivel = r.toString();  
+      });
+    }
     return nivel;
   }
 

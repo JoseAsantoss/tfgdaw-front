@@ -30,9 +30,9 @@ export class AuthService {
   }
 
   public get token(): string {
-    if (this._token != null) {
+    if (this._token !== null || this._token !== '') {
       return this._token;
-    } else if (this._token == null && sessionStorage.getItem('token') != null) {
+    } else if (this._token === null && sessionStorage.getItem('token') !== null) {
       this._token = sessionStorage.getItem('token')!;
       return this._token;
     }
@@ -84,7 +84,8 @@ export class AuthService {
   }
 
   obtenerDatosToken(accessToken: string): any {
-    if (accessToken != null) {
+
+    if (accessToken !== null && accessToken !== '' && accessToken !== undefined) {
       return JSON.parse(atob(accessToken.split(".")[1]));
     }
     return null;
@@ -92,7 +93,8 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     let payload = this.obtenerDatosToken(this.token);
-    if (payload != null && payload.user_name && payload.user_name.length > 0) {
+
+    if ((payload !== null && payload !== '' && payload !== undefined) && (payload.user_name && payload.user_name.length > 0)) {
       return true;
     }
     return false;
@@ -100,11 +102,6 @@ export class AuthService {
 
   hasRole(role?: string): boolean {
     let rol: string = '';
-
-    console.log('QUE LE PASA AL ROLE');
-    console.log(role);
-    
-    
 
     this._usuario?.roles.forEach(r => {
       rol = r.toString();

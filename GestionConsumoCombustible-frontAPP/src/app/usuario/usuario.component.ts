@@ -78,6 +78,7 @@ export class UsuarioComponent implements OnInit {
     this.vehiculoService.getVehiculos(usuario.usuarioId).subscribe({
       next: (response) => {
         this.listaVehículos = response;
+        
         console.log('LISTADO DE VEHICULOS');
         
         console.log(this.listaVehículos);

@@ -29,12 +29,12 @@ export class LoginComponent implements OnInit {
     console.log(pass);
     
     
-    if(mail == null || mail == '' || mail == undefined || pass == null || pass == '' || pass == undefined) {
+    if(mail === null || mail === '' || mail === undefined || pass === null || pass === '' || pass === undefined) {
       swal.fire('Error Login', 'Username o password vacías!', 'error');
       return;
     }
 
-    console.log('EL PUTO USUARIO QUE MANDO AL LOGIN');
+    console.log('EL USUARIO QUE MANDO AL LOGIN');
     console.log(this.usuario);
     
     
@@ -56,14 +56,6 @@ export class LoginComponent implements OnInit {
             url = '/usuario'
           }
         })
-
-        /*
-        if (usuario.roles === 'ROLE_CONDUCTOR') {
-          url = '/usuario-driver'
-        } else {
-          url = '/usuario'
-        }
-        */
   
         this.router.navigate([url])
           .then(nav => {

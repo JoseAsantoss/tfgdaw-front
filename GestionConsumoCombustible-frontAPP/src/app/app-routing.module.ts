@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { LoginComponent } from './login/login.component';
 import { FormularioAddUsuarioComponent } from './pages/formularios/formulario-add-usuario/formulario-add-usuario.component';
 import { FormularioAddVehiculoComponent } from './pages/formularios/formulario-add-vehiculo/formulario-add-vehiculo.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
       data: {role: environment.ROL_NO_CONDUCTOR}},
   {path: 'usuario-driver', component: UsuarioDriverComponent, canActivate: [AuthGuard, RoleGuard],
   data: {role: environment.ROL_CONDUCTOR}},
+  {path: '***', component: AuthInterceptor}
   
 ];
 

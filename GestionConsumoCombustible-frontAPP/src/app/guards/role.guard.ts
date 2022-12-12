@@ -28,7 +28,18 @@ export class RoleGuard implements CanActivate {
     }
     
     swal.fire('Acceso denegado', `Hola ${this.authService.getusuario().usuarioNombre} no tienes acceso a este recurso!`, 'warning');
-    this.router.navigate(['/login']);
+    if (this.authService.isAuthenticated()) {
+      if(this.authService.getusuario().roles.toString() === 'ROLE_CONDUCTOR') {
+        this.router.navigate(['/usuario-driver']);
+      } else if(this.authService.getusuario().roles.toString() === 'ROLE_ADMIN' ||
+        this.authService.getusuario().roles.toString() === 'ROLE_PARTICULAR' || 
+        this.authService.getusuario().roles.toString() === 'ROLE_EMPRESA') {
+          this.router.navigate(['/usuario']);
+      } else {
+        this.authService.logout();
+        this.router.navigate(['/login']);
+      }
+    }
     return false;
   }
 }
